@@ -1,0 +1,28 @@
+package com.mta.stock.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.mta.stock.service.PortfolioService;
+import com.mta.javacourse.model.portfolio;
+import com.mta.javacourse.model.Stock;
+
+
+public class PortfolioServlet extends HttpServlet{
+	
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		resp.setContentType("text/html");
+
+		PortfolioService portfolioService = new PortfolioService();
+		portfolio portfolio = portfolioService.getPortfolio();
+		Stock[] stocks = portfolio.getStocks();
+		resp.getWriter().println(portfolio.getHtmlPortfolio());
+		}
+	
+}
+

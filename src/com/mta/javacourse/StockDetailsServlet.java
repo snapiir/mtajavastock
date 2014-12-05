@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mta.javacourse.model.Stock;
+
 public class StockDetailsServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{ 
 		resp.setContentType("text/html");
@@ -12,7 +14,6 @@ public class StockDetailsServlet extends HttpServlet {
 	Stock stock1 = new Stock();
 	Stock stock2 = new Stock();
 	Stock stock3 = new Stock();
-	
 	java.util.Date date = new java.util.Date();
 	
 	date.setDate(15);
