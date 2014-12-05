@@ -41,7 +41,7 @@ import com.mta.javacourse.model.portfolio.StockStatus;
 	
 	public String getHtmlPortfolio(){
 		
-		String getHtmlPortfolio = "<h1> portfolio title: </h1>";
+		String getHtmlPortfolio = "<h1> Portfolio: </h1>";
 		 
 		for (i=0; i<portfolioSize; i++)
 		{
