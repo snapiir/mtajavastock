@@ -10,24 +10,31 @@ public class Stock {
 	public String getSymbol() {
 		return symbol;
 	}
+	
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
+	
 	public float getAsk() {
 		return ask;
 	}
+	
 	public void setAsk(float ask) {
 		this.ask = ask;
 	}
+	
 	public float getBid() {
 		return bid;
 	}
+	
 	public void setBid(float bid) {
 		this.bid = bid;
 	}
+	
 	public java.util.Date getEdate() {
 		return Edate;
 	}
+	
 	public void setEdate(java.util.Date edate) {
 		Edate = edate;
 	}
@@ -39,5 +46,17 @@ public class Stock {
 		
 	}
 	
+	public Stock(){
+		setSymbol("");
+		setAsk(0);
+		setBid(0);
+		setEdate(null);
+	}
 	
+	public Stock(Stock stock){
+		setSymbol(stock.getSymbol());
+		setAsk(stock.getAsk());
+		setBid(stock.getBid());
+		setEdate(stock.getEdate());
+	}
 }

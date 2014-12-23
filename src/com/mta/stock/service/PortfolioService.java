@@ -8,34 +8,33 @@ public class PortfolioService {
 	public portfolio getPortfolio() {
 		
 		portfolio myPortfolio = new portfolio();
-		Stock stock1 = new Stock();
-		Stock stock2 = new Stock();
-		Stock stock3 = new Stock();
-		
+		Stock[] stocks = new Stock[3];
 		java.util.Date date = new java.util.Date();
 		
 		date.setDate(15);
 		date.setMonth(11);
 		date.setYear(2014);
+		stocks[0] = new Stock();
+		stocks[0].setSymbol("PIH");
+		stocks[0].setAsk(12.4f);
+		stocks[0].setBid(13.1f);
+		stocks[0].setEdate(date);
 		
-		stock1.setSymbol("PIH");
-		stock1.setAsk(12.4f);
-		stock1.setBid(13.1f);
-		stock1.setEdate(date);
-		myPortfolio.addStock(stock1);
+		stocks[1] = new Stock();
+		stocks[1].setSymbol("AAL");
+		stocks[1].setAsk(5.5f);
+		stocks[1].setBid(5.78f);
+		stocks[1].setEdate(date);
 		
-		stock2.setSymbol("AAL");
-		stock2.setAsk(5.5f);
-		stock2.setBid(5.78f);
-		stock2.setEdate(date);
-		myPortfolio.addStock(stock2); 
+		stocks[2] = new Stock();
+		stocks[2].setSymbol("CAAS");
+		stocks[2].setAsk(31.5f);
+		stocks[2].setBid(31.2f);
+		stocks[2].setEdate(date);
 		
-		stock3.setSymbol("CAAS");
-		stock3.setAsk(31.5f);
-		stock3.setBid(31.2f);
-		stock3.setEdate(date);
-		myPortfolio.addStock(stock3);
 		
+		myPortfolio.addStock(stocks);
+		myPortfolio.setTitle("<h1> Portfolio 1#: </h1>");
 		return myPortfolio;
 	}
 }
