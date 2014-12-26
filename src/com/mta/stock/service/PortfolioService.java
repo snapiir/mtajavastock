@@ -3,38 +3,49 @@ package com.mta.stock.service;
 import com.mta.javacourse.model.portfolio;
 import com.mta.javacourse.model.Stock;
 
-public class PortfolioService {
+/**
+ * An instance of this class represents the portfoilio service.
+ * @author Sapir Duke 
+ * @since 2014
+ * date 24/12/2014
+ */
 
-	public portfolio getPortfolio() {
+public class PortfolioService{
+
+	/**
+	 * Returns the updated portfolio.
+	 * @param put values to the stocks variables by using stock class 
+	 * * @return myportfolio with an array of stocks.
+	 */
+	
+	public portfolio getPortfolio(){
 		
 		portfolio myPortfolio = new portfolio();
-		Stock[] stocks = new Stock[3];
 		java.util.Date date = new java.util.Date();
+		myPortfolio.setBalance(10000);
 		
 		date.setDate(15);
 		date.setMonth(11);
 		date.setYear(2014);
-		stocks[0] = new Stock();
-		stocks[0].setSymbol("PIH");
-		stocks[0].setAsk(12.4f);
-		stocks[0].setBid(13.1f);
-		stocks[0].setEdate(date);
 		
-		stocks[1] = new Stock();
-		stocks[1].setSymbol("AAL");
-		stocks[1].setAsk(5.5f);
-		stocks[1].setBid(5.78f);
-		stocks[1].setEdate(date);
+		Stock stock1 = new Stock("PIH",10,8.5f,date);
+		Stock stock2 = new Stock("AAL",30,25.5f,date);
+		Stock stock3 = new Stock("CAAS",20.5f,15.5f,date);
+	
 		
-		stocks[2] = new Stock();
-		stocks[2].setSymbol("CAAS");
-		stocks[2].setAsk(31.5f);
-		stocks[2].setBid(31.2f);
-		stocks[2].setEdate(date);
+		myPortfolio.addStock(stock1);
+		myPortfolio.addStock(stock2);
+		myPortfolio.addStock(stock3);
 		
+		myPortfolio.buyStock("PIH", 20);
+		myPortfolio.buyStock("AAL", 30);
+		myPortfolio.buyStock("CAAS",40);
+
+		myPortfolio.sellStock("AAL", -1);
+		myPortfolio.removeStock("CAAS");
 		
-		myPortfolio.addStock(stocks);
-		myPortfolio.setTitle("<h1> Portfolio 1#: </h1>");
+		myPortfolio.setTitle("<h1> Exercise 7 portfolio: </h1>");
+		
 		return myPortfolio;
 	}
 }

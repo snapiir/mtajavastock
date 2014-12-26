@@ -11,6 +11,12 @@ import com.mta.stock.service.PortfolioService;
 import com.mta.javacourse.model.portfolio;
 import com.mta.javacourse.model.Stock;
 
+/**
+ * An instance of this class represents portfolio servlet.
+ * @author Sapir Duke
+ * @since 2014
+ * date 24/12/2014
+ */
 
 public class PortfolioServlet extends HttpServlet{
 	
@@ -21,20 +27,9 @@ public class PortfolioServlet extends HttpServlet{
 		PortfolioService portfolioService = new PortfolioService();
 		portfolio portfolio = portfolioService.getPortfolio();
 		Stock[] stocks = portfolio.getStocks();
-		
-		portfolio portfolio2 = new portfolio(portfolio);
-		
-		resp.getWriter().println(portfolio.getHtmlPortfolio());
-		portfolio2.setTitle("<h1> Portfolio 2#: </h1>");
-		resp.getWriter().println(portfolio2.getHtmlPortfolio());
-		
-		portfolio.removeStock(0);
-		resp.getWriter().println(portfolio.getHtmlPortfolio() + "<br>");
-		resp.getWriter().println(portfolio2.getHtmlPortfolio() + "<br>");
-		portfolio2.getStocks()[2].setBid(55.55f);
+	
 
 		resp.getWriter().println(portfolio.getHtmlPortfolio() + "<br>");
-		resp.getWriter().println(portfolio2.getHtmlPortfolio() + "<br>");
 		
 		}	
 }
