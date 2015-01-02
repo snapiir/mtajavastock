@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mta.stock.service.PortfolioService;
-import com.mta.javacourse.model.portfolio;
+import com.mta.javacourse.model.Portfolio;
 import com.mta.javacourse.model.Stock;
 
 /**
@@ -25,7 +25,7 @@ public class PortfolioServlet extends HttpServlet{
 		resp.setContentType("text/html");
 
 		PortfolioService portfolioService = new PortfolioService();
-		portfolio portfolio = portfolioService.getPortfolio();
+		Portfolio portfolio = portfolioService.getPortfolio();
 		Stock[] stocks = portfolio.getStocks();
 	
 

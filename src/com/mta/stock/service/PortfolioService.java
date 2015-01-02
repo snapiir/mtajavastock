@@ -1,6 +1,6 @@
 package com.mta.stock.service;
 
-import com.mta.javacourse.model.portfolio;
+import com.mta.javacourse.model.Portfolio;
 import com.mta.javacourse.model.Stock;
 
 /**
@@ -18,9 +18,9 @@ public class PortfolioService{
 	 * * @return myportfolio with an array of stocks.
 	 */
 	
-	public portfolio getPortfolio(){
+	public Portfolio getPortfolio(){
 		
-		portfolio myPortfolio = new portfolio();
+		Portfolio myPortfolio = new Portfolio();
 		java.util.Date date = new java.util.Date();
 		myPortfolio.setBalance(10000);
 		

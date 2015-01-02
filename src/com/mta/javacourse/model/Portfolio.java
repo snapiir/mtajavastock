@@ -9,7 +9,7 @@
 	 * date 12/12/2014
 	 */
 
-	public class portfolio {
+	public class Portfolio {
 
 		public static enum ALGO_RECOMMENDATION {DO_NOTHING,BUY,SELL};
 		private final static int MAX_PORTFOLIO_SIZE = 5;
@@ -23,10 +23,10 @@
 
 		/**
 		 * constructor
-		 * @param portfolio instances
+		 * @param Portfolio instances
 		 */
 
-		public portfolio(){
+		public Portfolio(){
 			stockStatus = new StockStatus[MAX_PORTFOLIO_SIZE];
 			setStocksStatus(new StockStatus[MAX_PORTFOLIO_SIZE]);
 			stockStatusSize=0;
@@ -41,7 +41,7 @@
 		 * @param portfolio
 		 */
 
-		public portfolio(portfolio portfolio){
+		public Portfolio(Portfolio portfolio){
 			this();
 			this.title = portfolio.getTitle();
 			this.portfolioSize = portfolio.portfolioSize;

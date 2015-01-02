@@ -1,7 +1,7 @@
 package com.mta.javacourse.model;
 
 import java.util.Date;
-import com.mta.javacourse.model.portfolio.ALGO_RECOMMENDATION;
+import com.mta.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 
 /**
  * An instance of this class represents a Stock with all of parameters.
