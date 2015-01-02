@@ -11,10 +11,11 @@ import java.util.Date;
 
 public class Stock{
 
-	private String symbol;
-	private float ask;
-	private float bid;
-	private java.util.Date Edate;
+	protected String symbol;
+	protected float ask;
+	protected float bid;
+	protected java.util.Date Edate;
+	
 	
 	// getters and setters:
 	
@@ -61,29 +62,33 @@ public class Stock{
 		String StockDetailsString = " <b> stock symbol </b>: " + getSymbol() + 	" <b> ask </b>: " + getAsk() + " <b> bid </b>: " + getBid() + " <b> date </b>: " +Edate.getDate()+ "/"  +Edate.getMonth()+ "/" +Edate.getYear();
 		return StockDetailsString;
 	}
+
+	/**
+	 * constructor
+	 */
+	
+	public Stock(){
+		if(symbol != null)
+		{
+			setSymbol(symbol);
+			setAsk(ask);
+			setBid(bid);
+			setEdate(Edate);
+		}
+   }
 	
 	/**
 	 * copy constructor
 	 * @param stocks 
 	 */
 	
-	public Stock(Stock stock){
-		this(stock.getSymbol(),stock.getAsk(),stock.getBid(),stock.getEdate());
+	public Stock(Stock Stock)
+	{
+		this.getSymbol();
+		this.getAsk();
+        this.getBid();
+        this.getEdate();
 	}
 	
-	/**
-	 * constructor
-	 * @param stocks 
-	 */
-	
-	public Stock(String stockSymbol1, float ask1, float bid1, Date Edate){
-		if(stockSymbol1 != null)
-		{
-			setSymbol(stockSymbol1);
-			setAsk(ask1);
-			setBid(bid1);
-			setEdate(Edate);
-		}
-   }
 }
 

@@ -28,11 +28,25 @@ public class PortfolioService{
 		date.setMonth(11);
 		date.setYear(2014);
 		
-		Stock stock1 = new Stock("PIH",10,8.5f,date);
-		Stock stock2 = new Stock("AAL",30,25.5f,date);
-		Stock stock3 = new Stock("CAAS",20.5f,15.5f,date);
+		Stock stock1 = new Stock();
+		Stock stock2 = new Stock();
+		Stock stock3 = new Stock();
 	
-		
+		stock1.setSymbol("PIH");
+		stock1.setAsk(10);
+		stock1.setBid(8.5f);
+		stock1.setEdate(date);
+			
+		stock2.setSymbol("AAL");
+		stock2.setAsk(30);
+		stock2.setBid(25.5f);
+		stock2.setEdate(date);
+			
+		stock3.setSymbol("CAAS");
+		stock3.setAsk(20);
+		stock3.setBid(15.5f);
+		stock3.setEdate(date);
+			
 		myPortfolio.addStock(stock1);
 		myPortfolio.addStock(stock2);
 		myPortfolio.addStock(stock3);
@@ -44,7 +58,7 @@ public class PortfolioService{
 		myPortfolio.sellStock("AAL", -1);
 		myPortfolio.removeStock("CAAS");
 		
-		myPortfolio.setTitle("<h1> Exercise 7 portfolio: </h1>");
+		myPortfolio.setTitle("<h1> Exercise 8 portfolio: </h1>");
 		
 		return myPortfolio;
 	}
