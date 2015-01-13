@@ -2,6 +2,10 @@ package com.mta.stock.service;
 
 import com.mta.javacourse.model.Portfolio;
 import com.mta.javacourse.model.Stock;
+import com.mta.stock.exception.BalanceException;
+import com.mta.stock.exception.PortfolioFullException;
+import com.mta.stock.exception.StockAlreadyExistsException;
+import com.mta.stock.exception.StockNotExistException;
 
 /**
  * An instance of this class represents the portfoilio service.
@@ -16,9 +20,10 @@ public class PortfolioService{
 	 * Returns the updated portfolio.
 	 * @param put values to the stocks variables by using stock class 
 	 * * @return myportfolio with an array of stocks.
+	 * @throws Exception 
 	 */
 	
-	public Portfolio getPortfolio(){
+	public Portfolio getPortfolio() throws BalanceException, PortfolioFullException, StockAlreadyExistsException, StockNotExistException{
 		
 		Portfolio myPortfolio = new Portfolio();
 		java.util.Date date = new java.util.Date();
@@ -31,7 +36,8 @@ public class PortfolioService{
 		Stock stock1 = new Stock();
 		Stock stock2 = new Stock();
 		Stock stock3 = new Stock();
-	
+		Stock stock4 = new Stock();
+		
 		stock1.setSymbol("PIH");
 		stock1.setAsk(10);
 		stock1.setBid(8.5f);
@@ -46,14 +52,21 @@ public class PortfolioService{
 		stock3.setAsk(20);
 		stock3.setBid(15.5f);
 		stock3.setEdate(date);
+		
+		stock4.setSymbol("CAAS");
+		stock4.setAsk(20);
+		stock4.setBid(15.5f);
+		stock4.setEdate(date);
 			
 		myPortfolio.addStock(stock1);
 		myPortfolio.addStock(stock2);
 		myPortfolio.addStock(stock3);
+		myPortfolio.addStock(stock4);
 		
 		myPortfolio.buyStock("PIH", 20);
 		myPortfolio.buyStock("AAL", 30);
 		myPortfolio.buyStock("CAAS",40);
+		
 
 		myPortfolio.sellStock("AAL", -1);
 		myPortfolio.removeStock("CAAS");

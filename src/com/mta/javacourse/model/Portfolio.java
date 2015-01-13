@@ -2,6 +2,11 @@
 
 	import java.util.Date;
 
+import com.mta.stock.exception.BalanceException;
+import com.mta.stock.exception.PortfolioFullException;
+import com.mta.stock.exception.StockAlreadyExistsException;
+import com.mta.stock.exception.StockNotExistException;
+
 	/**
 	 * An instance of this class represents a portfolio which has stocks.
 	 * @author Sapir Duke
@@ -136,7 +141,7 @@
 		 * @param stock
 		 */
 
-		public void addStock(Stock stock){
+		public void addStock(Stock stock) throws StockAlreadyExistsException, PortfolioFullException{
 
 			i = 0;
 			while(stockStatus[i]!=null)
@@ -144,19 +149,19 @@
 				if(stock.getSymbol().equals(stockStatus[i].getSymbol()))
 				{
 					System.out.println(" You have already this stock "+stock.getSymbol());
-					return;
+					throw new StockAlreadyExistsException(stock.getSymbol());
 				}
 				i++;
 			}
 			if(portfolioSize >= MAX_PORTFOLIO_SIZE)
 			{
 				System.out.println(" Can't add new stock, portfolio can have only "+MAX_PORTFOLIO_SIZE+" stocks");
+				throw new PortfolioFullException();
 			}
 			
 			else
 			{
-				
-				
+					
 				StockStatus stockStatus = new StockStatus();
 				stockStatus.ask = stock.getAsk();
 				stockStatus.bid = stock.getBid();
@@ -176,7 +181,7 @@
 		 * @param stockSymbol - remove the stock from the stocks array.
 		 */
 
-		public boolean removeStock(String stockSymbol){
+		public void removeStock(String stockSymbol)throws StockNotExistException{
 
 			int i = 0;
 			boolean isFound = false;
@@ -185,7 +190,7 @@
 			{
 				if (stockStatus[i].symbol.equals(stockSymbol))
 				{
-					isSold = sellStock(stockSymbol, -1);
+					sellStock(stockSymbol, -1);
 					isFound = true;
 					break; 
 				}
@@ -193,7 +198,8 @@
 			if (isFound == false) 
 			{
 				System.out.println(stockSymbol+" hasn't been found");
-				return false;
+				throw new StockNotExistException(stockSymbol);
+				
 			}
 			else
 			{
@@ -217,10 +223,10 @@
 				else 
 				{
 					System.out.println(stockSymbol+" hasn't been sold");
-					return false;
+					
 				}
 			}
-			return isFound;
+			
 		}
 
 		/**
@@ -229,7 +235,7 @@
 		 * @return boolean success/fail
 		 */
 
-		public boolean buyStock (String symbol,int quantity){
+		public void buyStock (String symbol,int quantity)throws BalanceException{
 
 			boolean Symbolfound = false;
 			int amount;
@@ -248,24 +254,25 @@
 				if (quantity == -1) {
 					amount = (int) Math.floor((balance/stockStatus[i].ask));
 					balance = balance - amount*stockStatus[i].ask;
-					return true;
+					
 				}
 				else
 				{
 					if(stockStatus[i].ask*quantity > balance)
 					{
 						System.out.println("Not enough balance to complete purchase");
-						return false;
+						throw new BalanceException();
+						
 					}
 					stockStatus[i].stockQuantity=stockStatus[i].stockQuantity+quantity;
 					balance = balance - stockStatus[i].ask*quantity;
-					return true;
+					
 				}
 			}
 			else
 			{
 				System.out.println(symbol+" purchase has failed");
-				return false;
+				
 			}
 		}
 
@@ -275,7 +282,7 @@
 		 * @return boolean success/fail
 		 */
 
-		public boolean sellStock(String symbol,int quantity){
+		public void sellStock(String symbol,int quantity) throws StockNotExistException{
 
 			boolean symbolFound = false;
 			int i = 0;
@@ -294,24 +301,25 @@
 				{
 					balance = balance + stockStatus[i].stockQuantity*stockStatus[i].bid;
 					stockStatus[i].stockQuantity = 0;
-					return true;
+					
 				}
 				if (quantity == MAX_PORTFOLIO_SIZE || quantity > MAX_PORTFOLIO_SIZE || quantity < 0)
 				{
 					System.out.println(symbol+" hasn't been sold - Not enough stocks to sell");
-					return false;
+					
 				}
 				else
 				{
 					stockStatus[i].stockQuantity = stockStatus[i].stockQuantity - quantity;
 					balance = balance + stockStatus[i].bid*quantity;
-					return true;
+					
 				}
 			}
 			else
 			{
 				System.out.println(symbol+" hasn't been sold");
-				return false;
+				throw new StockNotExistException(symbol);
+				
 			}
 		}
 
@@ -333,7 +341,6 @@
 
 				getHtmlPortfolio += "<b>Stock</b> " + (i+1) + ": " +stockStatus[i].getHtmlDescription() + " , <b>quantity</b>: " +stockStatus[i].getStockQuantity()+ "<br>";
 
-			
 			return getHtmlPortfolio;
 		}
 
