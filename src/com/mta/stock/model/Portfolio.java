@@ -1,6 +1,7 @@
-     package com.mta.javacourse.model;
+     package com.mta.stock.model;
 
 	import java.util.Date;
+import java.util.List;
 
 import com.mta.stock.exception.BalanceException;
 import com.mta.stock.exception.PortfolioFullException;
@@ -17,7 +18,7 @@ import com.mta.stock.exception.StockNotExistException;
 	public class Portfolio {
 
 		public static enum ALGO_RECOMMENDATION {DO_NOTHING,BUY,SELL};
-		private final static int MAX_PORTFOLIO_SIZE = 5;
+		public final static int MAX_PORTFOLIO_SIZE = 5;
 		
 		private String title;
 		private StockStatus [] stockStatus;
@@ -41,6 +42,19 @@ import com.mta.stock.exception.StockNotExistException;
 			i = 0;
 		}
 
+		
+		public Portfolio(List<StockStatus> stockStatuses){
+			this();
+			int arraySize = stockStatuses.size();
+			setPortfolioSize(arraySize);
+
+			if(stockStatuses.size() > MAX_PORTFOLIO_SIZE)
+				arraySize = MAX_PORTFOLIO_SIZE;
+
+			for(int i = 0; i < arraySize; i++)
+				this.stockStatus[i] = stockStatuses.get(i);
+		}
+		
 		/**
 		 * copy constructor
 		 * @param portfolio
@@ -111,9 +125,10 @@ import com.mta.stock.exception.StockNotExistException;
 		 * @param amount
 		 */
 
-		public void updateBalance(float amount){
+		public void updateBalance (float amount) throws BalanceException{
 
 			balance = balance + amount;
+			throw new BalanceException();
 		}
 
 		
@@ -342,6 +357,19 @@ import com.mta.stock.exception.StockNotExistException;
 				getHtmlPortfolio += "<b>Stock</b> " + (i+1) + ": " +stockStatus[i].getHtmlDescription() + " , <b>quantity</b>: " +stockStatus[i].getStockQuantity()+ "<br>";
 
 			return getHtmlPortfolio;
+		}
+		
+		public StockStatus findBySymbol(String symbol) {
+			for(int i = 0; i < portfolioSize; i++)
+			{
+				if(this.stockStatus[i] != null)
+				{
+					if(this.stockStatus[i].getSymbol().equalsIgnoreCase(symbol))	
+						return this.stockStatus[i];
+				}	
+			}	
+			return null;
+
 		}
 
 	}

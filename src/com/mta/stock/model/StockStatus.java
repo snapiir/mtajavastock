@@ -1,7 +1,8 @@
-package com.mta.javacourse.model;
+package com.mta.stock.model;
 
 import java.util.Date;
-import com.mta.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
+
+import com.mta.stock.model.Portfolio.ALGO_RECOMMENDATION;
 
 /**
  * An instance of this class represents a Stock with all of parameters.
@@ -48,11 +49,11 @@ public class StockStatus extends Stock {
 	 * @param StockStatus
 	 */
 	
-	public StockStatus (StockStatus stockStatus)
+	public StockStatus (Stock stock)
 	{
-		super(stockStatus);
-		this.recommendation = stockStatus.recommendation;
-		this.stockQuantity = stockStatus.stockQuantity;
+		super(stock);
+		this.recommendation = ALGO_RECOMMENDATION.DO_NOTHING;
+		this.stockQuantity = 0;
 	}
 	
 	
